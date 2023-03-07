@@ -17,3 +17,11 @@ for(let i =0;i<items.length;i++){
     items[i].style.fontWeight = "bold"
     items[i].style.color = "red"
 }
+
+// items[4].style.color = "red" //gives TypeError:
+
+const li = document.getElementsByTagName("li");
+for(let i =0;i<li.length;i++){
+    li[i].style.backgroundColor = "#f4f4f4"
+    li[i].style.fontWeight = "bold"
+}
