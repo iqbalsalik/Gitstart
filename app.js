@@ -25,3 +25,17 @@ for(let i =0;i<li.length;i++){
     li[i].style.backgroundColor = "#f4f4f4"
     li[i].style.fontWeight = "bold"
 }
+
+const secondItem = document.querySelector("li:nth-child(2)");
+// secondItem.style.backgroundColor = "green"
+const thirdItem = document.querySelector("li:nth-child(3)");
+// thirdItem.style.display = "none"
+
+const secondItemByQsAll = document.querySelectorAll("li");
+secondItemByQsAll[1].style.color = "green"
+
+const odd = document.querySelectorAll("li:nth-child(odd)");
+for(let i = 0;i<odd.length;i++){
+    odd[i].style.backgroundColor = "green"
+}
+
