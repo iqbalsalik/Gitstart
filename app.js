@@ -47,19 +47,14 @@ function removeItem(e) {
 function filterItems(e){
    let filterText =  e.target.value.toLowerCase();
    let itemText = document.querySelectorAll("li")
-//    Array.from(itemText).forEach(item=>{
-//     console.log(item.firstChild.nextSibling)
-//     // if(item.firstChild.textContent.toLowerCase().indexOf(filterText)!=-1){
-//     //     item.style.display = 'block';
-//     // }else{
-//     //     item.style.display = 'none';
-//     // }
-//    })
-for(let i=0;i<itemText.length;i++){
-    if(itemText[i].textContent.toLowerCase().indexOf(filterText)!=-1){
-        itemText[i].style.display = 'block'
+   Array.from(itemText).forEach(item=>{
+    let description = item.childNodes[3].textContent.toLowerCase()
+    console.log(description)
+    if(item.firstChild.textContent.toLowerCase().indexOf(filterText)!=-1 ||description.indexOf(filterText)!=-1){
+        item.style.display = 'block';
     }else{
-        itemText[i].style.display = 'none'
+        item.style.display = 'none';
     }
+   })
 }
-}
+
