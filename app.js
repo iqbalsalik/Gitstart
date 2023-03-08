@@ -1,60 +1,22 @@
-let item = document.getElementById("item");
-const submitBtn = document.getElementById("submitBtn")
-const itemList = document.getElementById("items")
-const filter = document.getElementById("filter");
-const itemDescription = document.getElementById("description")
+const msg = document.querySelector(".msg")
+const inputName = document.getElementById("name");
+const inputEmail = document.getElementById("email")
+const btn = document.getElementById("btn");
+const userList = document.getElementById("users")
 
-submitBtn.addEventListener("click", addItem);
+btn.addEventListener("click",addUserList);
 
-itemList.addEventListener("click", removeItem);
+function addUserList(e){
+    e.preventDefault()
+    //creating li name and email id given by user and appending in ul
+    let li = document.createElement("li");
+    li.className = "item";
+    li.textContent = `${inputName.value} : ${inputEmail.value}`
+    userList.appendChild(li)
 
-filter.addEventListener("keyup",filterItems)
+    //setting localstorage
+    localStorage.setItem(inputName.value,inputEmail.value)
 
-function addItem(e){
-    e.preventDefault();
-    //creating li element
-    let newLi = document.createElement("li");
-    // adding className
-    newLi.className = "list-group-item"
-    // creating deleteBtn
-    let deleteBtn = document.createElement('button');
-    deleteBtn.className = "btn btn-danger btn-sm float-right delete"
-    deleteBtn.innerText = "X"
-
-    //creating edit button
-    let editBtn = document.createElement("button");
-    editBtn.className = "btn btn-primary btn-sm float-right edit ml-1"
-    editBtn.appendChild(document.createTextNode("edit"))
-    // appendChild to created li
-    newLi.innerText = item.value;
-    newLi.appendChild(editBtn)
-    newLi.appendChild(deleteBtn);
-    itemList.appendChild(newLi)
-    item.value = ''
-
-    let descriptionText = document.createTextNode(" " + itemDescription.value)
-    newLi.appendChild(descriptionText)
-    itemDescription.value = ''
+    inputEmail.value = ''
+    inputName.value = ''
 }
-
-function removeItem(e) {
-    if (e.target.classList.contains("delete")) {
-        let li = e.target.parentElement;
-        itemList.removeChild(li)
-    }
-}
-
-function filterItems(e){
-   let filterText =  e.target.value.toLowerCase();
-   let itemText = document.querySelectorAll("li")
-   Array.from(itemText).forEach(item=>{
-    let description = item.childNodes[3].textContent.toLowerCase()
-    console.log(description)
-    if(item.firstChild.textContent.toLowerCase().indexOf(filterText)!=-1 ||description.indexOf(filterText)!=-1){
-        item.style.display = 'block';
-    }else{
-        item.style.display = 'none';
-    }
-   })
-}
-
