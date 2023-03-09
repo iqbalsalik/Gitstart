@@ -15,7 +15,9 @@ function addUserList(e){
     userList.appendChild(li)
 
     //setting localstorage
-    localStorage.setItem(inputName.value,inputEmail.value)
+    let nameValue = JSON.stringify(inputName.value);
+    let emailValue = JSON.stringify(inputEmail.value);
+    localStorage.setItem(nameValue,emailValue) //serializing the local storage;
 
     inputEmail.value = ''
     inputName.value = ''
