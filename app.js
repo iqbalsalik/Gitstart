@@ -9,7 +9,7 @@ btn.addEventListener("click", addUserList);
 
 
 
- 
+
 
 function addUserList(e) {
     e.preventDefault()
@@ -20,13 +20,13 @@ function addUserList(e) {
         email_id: inputEmail.value
     }
     // localStorage.setItem(nameValue, JSON.stringify(userDetails)) //serializing the local storage;
-    axios.post( 
-        "https://crudcrud.com/api/a01e403308614170ba4b8a1edb4bee10/uderDetails",userDetails
-     ).then(res=>{
+    axios.post(
+        "https://crudcrud.com/api/0263aefeaeac45cfb1b5117ca0b3a2fa/userDetails", userDetails
+    ).then(res => {
         showNewUserOnScreen(res.data)
-     }).catch(err=>{
+    }).catch(err => {
         console.log(err)
-     })
+    })
 
     inputEmail.value = ''
     inputName.value = ''
@@ -52,39 +52,52 @@ function addUserList(e) {
 }
 
 
-window.addEventListener("DOMContentLoaded",()=>{
-    axios.get("https://crudcrud.com/api/a01e403308614170ba4b8a1edb4bee10/uderDetails").then((res)=>{
-        
-        for(let i =0;i<res.data.length;i++){
+window.addEventListener("DOMContentLoaded", () => {
+    axios.get("https://crudcrud.com/api/0263aefeaeac45cfb1b5117ca0b3a2fa/userDetails").then((res) => {
+        console.log(res.data)
+
+        for (let i = 0; i < res.data.length; i++) {
             showNewUserOnScreen(res.data[i])
         }
-        
+
     })
 })
-
-function showNewUserOnScreen(obj){
-// creating li name and email id given by user and appending in ul
-let li = document.createElement("li");
-li.className = "item";
-
-
-// createing delete button
-let deletBtn = document.createElement("button")
-deletBtn.textContent = "Delete";
-deletBtn.id = "delete"
-deletBtn.style.backgroundColor = "#f4f4f4";
-deletBtn.style.color = 'black'
+function showNewUserOnScreen(obj) {
+    // creating li name and email id given by user and appending in ul
+    let li = document.createElement("li");
+    li.className = "item";
+    li.id = `${obj._id}`
 
 
-// creating edit button;
-let editBtn = document.createElement("button");
-editBtn.textContent = "Edit";
-editBtn.id = "edit";
-editBtn.style.backgroundColor = "#f4f4f4";
-editBtn.style.color = "black";
-editBtn.style.marginLeft = "4px"
-li.innerText = `${obj.name} ${obj.email_id} ${obj.phone_Number}`
-li.appendChild(deletBtn)
-li.appendChild(editBtn)
-userList.appendChild(li)
+    // createing delete button
+    let deletBtn = document.createElement("button")
+    deletBtn.textContent = "Delete";
+    deletBtn.id = "delete"
+    deletBtn.style.backgroundColor = "#f4f4f4";
+    deletBtn.style.color = 'black'
+
+
+    // creating edit button;
+    let editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.id = "edit";
+    editBtn.style.backgroundColor = "#f4f4f4";
+    editBtn.style.color = "black";
+    editBtn.style.marginLeft = "4px"
+    li.innerText = `${obj.name} ${obj.email_id} ${obj.phone_Number}`
+    li.appendChild(deletBtn)
+    li.appendChild(editBtn)
+    userList.appendChild(li)
+
+
+    deletBtn.addEventListener("click", (e) => {
+        if (e.target.id.contains = "delete") {
+                axios.delete(`https://crudcrud.com/api/0263aefeaeac45cfb1b5117ca0b3a2fa/userDetails/${e.target.parentElement.id}`).then(()=>{
+                    e.target.parentElement.remove()
+                })
+           
+        }
+    })
 }
+
+console.log(userList[0])
